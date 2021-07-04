@@ -5,7 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
-
+posts_info.z01
+info_files
 # Distribution / packaging
 .Python
 build/
