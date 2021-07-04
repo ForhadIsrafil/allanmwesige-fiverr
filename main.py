@@ -42,7 +42,7 @@ for file_name in list_of_files:
     data_list.append(data)
 
 df = pd.DataFrame(data_list)
-df.to_excel('sample_data.xlsx', index=False)
+df.to_csv('sample_data.csv', index=False)
 # with open('json_data_files/babimaronna-1940027008320063117.json', 'r', encoding="utf-8") as f:
 #     data = json.load(f)
 # #     dict_data = {
