@@ -25,19 +25,23 @@ for file_name in list_of_files:
         comments = [comment['node']['text'] for comment in to_dict['edge_media_to_parent_comment']['edges']]
     except Exception as e:
         comments = []
+    rate = (to_dict['edge_media_preview_like']['count'] + no_comment) / \
+           influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0]
+
     data = {
-        "User ID": to_dict['owner']['id'],
-        "Username": to_dict['owner']['username'],
-        "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[0],
-        "Comments": comments,
-        "No_comments": no_comment,
-        "Likes": to_dict['edge_media_preview_like']['count'],
-        "Followers": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
-        "Engagement Rate": (to_dict['edge_media_preview_like']['count'] + no_comment) /
-                           influencer_df[influencer_df['Username'] == to_dict['owner']['username']][
-                               '#Followers'].values[0],
-        "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S'),
-        "Video or Photo": to_dict['is_video'],
+               "User ID": to_dict['owner']['id'],
+               "Username": to_dict['owner']['username'],
+               "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[
+                   0],
+               "Comments": comments,
+               "No_comments": no_comment,
+               "Likes": to_dict['edge_media_preview_like']['count'],
+               "Followers":
+                   influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
+               "Engagement Rate": float("{:.2f}".format(rate)),
+           "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime(
+        '%Y-%m-%d %H:%M:%S'),
+                         "Video or Photo": to_dict['is_video'],
     }
     data_list.append(data)
 
