@@ -33,9 +33,9 @@ for file_name in list_of_files:
         "No_comments": no_comment,
         "Likes": to_dict['edge_media_preview_like']['count'],
         "Followers": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
-        "Engagement Rate":
-            influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0] / (
-                        to_dict['edge_media_preview_like']['count'] + no_comment),
+        "Engagement Rate": (to_dict['edge_media_preview_like']['count'] + no_comment) /
+                           influencer_df[influencer_df['Username'] == to_dict['owner']['username']][
+                               '#Followers'].values[0],
         "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S'),
         "Video or Photo": to_dict['is_video'],
     }
