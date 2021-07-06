@@ -9,44 +9,48 @@ import glob
 influencer_df = pd.read_csv('Influencer names and ID.txt', sep='\t')
 # followers = influencer_df[influencer_df['Username'] == 'makeupbynvs']['#Followers'].values[0]
 
-list_of_files = glob.glob('json_data_files/*.info')  # get the list of file
+list_of_files = glob.glob('json_data_1/*.info')  # get the list of file
 
 data_list = []
 for file_name in list_of_files:
-    print(file_name)
-    file = open(file_name, 'r', encoding="utf-8")
-    to_dict = json.load(file)
+    # print(file_name)
     # print(influencer_df[influencer_df['Username'] == to_dict['owner']['username']])
     try:
-        no_comment = to_dict['edge_media_to_parent_comment']['count']
-    except Exception as e:
-        no_comment = 0
-    try:
-        comments = [comment['node']['text'] for comment in to_dict['edge_media_to_parent_comment']['edges']]
-    except Exception as e:
-        comments = []
-    rate = (to_dict['edge_media_preview_like']['count'] + no_comment) / \
-           influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0]
+        file = open(file_name, 'r', encoding="utf-8")
+        to_dict = json.load(file)
+        try:
+            no_comment = to_dict['edge_media_to_parent_comment']['count']
+        except Exception as e:
+            no_comment = 0
+        if no_comment > 0:
+            try:
+                comments = [comment['node']['text'] for comment in to_dict['edge_media_to_parent_comment']['edges']]
+            except Exception as e:
+                comments = []
+            rate = (to_dict['edge_media_preview_like']['count'] + no_comment) / \
+                   influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0]
 
-    data = {
-               "User ID": to_dict['owner']['id'],
-               "Username": to_dict['owner']['username'],
-               "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[
-                   0],
-               "Comments": comments,
-               "No_comments": no_comment,
-               "Likes": to_dict['edge_media_preview_like']['count'],
-               "Followers":
-                   influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
-               "Engagement Rate": float("{:.2f}".format(rate)),
-           "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime(
-        '%Y-%m-%d %H:%M:%S'),
-                         "Video or Photo": to_dict['is_video'],
-    }
-    data_list.append(data)
+            data = {
+                "User ID": to_dict['owner']['id'],
+                "Username": to_dict['owner']['username'],
+                "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[
+                    0],
+                "Comments": comments,
+                "No_comments": no_comment,
+                "Likes": to_dict['edge_media_preview_like']['count'],
+                "Followers":
+                    influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
+                "Engagement Rate": float("{:.2f}".format(rate)),
+                "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime(
+                    '%Y-%m-%d %H:%M:%S'),
+                "Video or Photo": to_dict['is_video'],
+            }
+            data_list.append(data)
+    except Exception as e:
+        pass
 
 df = pd.DataFrame(data_list)
-df.to_csv('sample_data.csv', index=False)
+df.to_csv('json_data_1.csv', index=False)
 # with open('json_data_files/babimaronna-1940027008320063117.json', 'r', encoding="utf-8") as f:
 #     data = json.load(f)
 # #     dict_data = {
