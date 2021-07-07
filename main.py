@@ -12,7 +12,7 @@ influencer_df = pd.read_csv('Influencer names and ID.txt', sep='\t')
 list_of_files = glob.glob('json_data_1/*.info')  # get the list of file
 
 data_list = []
-for file_name in list_of_files:
+for file_name in list_of_files[:500]:
     # print(file_name)
     # print(influencer_df[influencer_df['Username'] == to_dict['owner']['username']])
     try:
@@ -22,11 +22,12 @@ for file_name in list_of_files:
             no_comment = to_dict['edge_media_to_parent_comment']['count']
         except Exception as e:
             no_comment = 0
-        if no_comment > 0:
-            try:
-                comments = [comment['node']['text'] for comment in to_dict['edge_media_to_parent_comment']['edges']]
-            except Exception as e:
-                comments = []
+        try:
+            comments = [comment['node']['text'] for comment in to_dict['edge_media_to_parent_comment']['edges']]
+        except Exception as e:
+            comments = []
+
+        if len(comments) > 0:
             rate = (to_dict['edge_media_preview_like']['count'] + no_comment) / \
                    influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0]
 
@@ -36,7 +37,7 @@ for file_name in list_of_files:
                 "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[
                     0],
                 "Comments": comments,
-                "No_comments": no_comment,
+                "No of comments": no_comment,
                 "Likes": to_dict['edge_media_preview_like']['count'],
                 "Followers":
                     influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0],
