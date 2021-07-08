@@ -12,7 +12,7 @@ influencer_df = pd.read_csv('Influencer names and ID.txt', sep='\t')
 list_of_files = glob.glob('json_data_1/*.info')  # get the list of file
 
 data_list = []
-for file_name in list_of_files[:500]:
+for file_name in list_of_files:
     # print(file_name)
     # print(influencer_df[influencer_df['Username'] == to_dict['owner']['username']])
     try:

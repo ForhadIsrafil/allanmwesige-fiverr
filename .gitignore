@@ -6,6 +6,7 @@ json_*
 json_data_files
 # C extensions
 *.so
+*.csv
 posts_info.z01
 info_files
 # Distribution / packaging
