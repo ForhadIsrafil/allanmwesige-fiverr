@@ -12,7 +12,7 @@ influencer_df = pd.read_csv('Influencer names and ID.txt', sep='\t')
 list_of_files = glob.glob('json_data_1/*.info')  # get the list of file
 
 data_list = []
-for file_name in list_of_files:
+for file_name in list_of_files[:500]:
     # print(file_name)
     # print(influencer_df[influencer_df['Username'] == to_dict['owner']['username']])
     try:
@@ -52,19 +52,6 @@ for file_name in list_of_files:
 
 df = pd.DataFrame(data_list)
 df.to_csv('json_data_1.csv', index=False)
-# with open('json_data_files/babimaronna-1940027008320063117.json', 'r', encoding="utf-8") as f:
-#     data = json.load(f)
-# #     dict_data = {
-# #         "username": data['owner']['username'],
-# #         "id": data['id'],
-# #         "taken_at_timestamp": data["taken_at_timestamp"],
-# #         "edge_media_preview_like": data["edge_media_preview_like"]['count'],
-# #         "caption": data['edge_media_to_caption']['edges'][0]['node']['text'],
-# #     }
-# #
-# df = pd.DataFrame([data])
-# df.to_csv('sample3.csv', index=False)
-# print(df.columns)
 
 # https://drive.google.com/drive/folders/1UxNZ32HYsgL9xDgGyd4xJThRwFZnQzsZ
 
