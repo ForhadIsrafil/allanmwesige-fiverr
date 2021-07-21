@@ -51,6 +51,11 @@ for file_name in list_of_files[:500]:
         pass
 
 df = pd.DataFrame(data_list)
+df['Comments'] = df1['Comments'].apply(lambda x: re.sub('[^A-Za-z0-9]+',' ', str(x)))
+nan_value = float("NaN")
+df.replace(" ", nan_value, inplace=True)
+df.dropna(subset = ["Comments"],inplace=True)
+
 df2 = df.sample(frac=1).reset_index(drop=True)
 df2.to_csv('json_data_1.csv', index=False)
 
