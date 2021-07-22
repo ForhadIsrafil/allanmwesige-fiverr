@@ -27,7 +27,7 @@ filters2 = [(df1['Ratings'] == 1), (df1['Ratings'] == 2)]
 values2 = ['happy', 'not happy']
 df1['Is_Response'] = np.select(filters2, values2)
 df1.columns = df1.columns.str.replace(' ','_')
-df1.to_csv('re_sp_c.csv', index=False)
+df1.to_csv('re_sp_c_final.csv', index=False)
 # df1['Engagement Rate'] = df1['Engagement Rate'] * 100
 # g = df1.sample(frac=1).reset_index(drop=True)
 # g.to_csv('final_remove_.csv', index=False)

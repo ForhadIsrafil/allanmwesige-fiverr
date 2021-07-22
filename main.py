@@ -1,7 +1,7 @@
-import os
+import re
 import json
 import datetime
-
+import numpy as np
 import pandas as pd
 import glob
 
@@ -51,10 +51,20 @@ for file_name in list_of_files[:500]:
         pass
 
 df = pd.DataFrame(data_list)
-df['Comments'] = df1['Comments'].apply(lambda x: re.sub('[^A-Za-z0-9]+',' ', str(x)))
+df['Comments'] = df['Comments'].apply(lambda x: re.sub('[^A-Za-z0-9]+', ' ', str(x)))
+# print(df1['Comments'].dtypes)
 nan_value = float("NaN")
 df.replace(" ", nan_value, inplace=True)
-df.dropna(subset = ["Comments"],inplace=True)
+df.dropna(subset=["Comments"], inplace=True)
+# print(df1['Comments'].head(30))
+filters = [(df['Engagement Rate'] >= 0.08) & (df['Engagement Rate'] <= 0.14), (df['Engagement Rate'] <= 0.07)]
+values = [1, 2]
+df['Ratings'] = np.select(filters, values)
+
+filters2 = [(df['Ratings'] == 1), (df['Ratings'] == 2)]
+values2 = ['happy', 'not happy']
+df['Is_Response'] = np.select(filters2, values2)
+df.columns = df.columns.str.replace(' ','_')
 
 df2 = df.sample(frac=1).reset_index(drop=True)
 df2.to_csv('json_data_1.csv', index=False)
