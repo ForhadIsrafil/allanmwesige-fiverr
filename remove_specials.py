@@ -27,7 +27,18 @@ filters2 = [(df1['Ratings'] == 1), (df1['Ratings'] == 2)]
 values2 = ['happy', 'not happy']
 df1['Is_Response'] = np.select(filters2, values2)
 df1.columns = df1.columns.str.replace(' ','_')
-df1.to_csv('re_sp_c_final.csv', index=False)
+csv1 = df1.iloc[:106456,:]
+csv2 = df1.iloc[106456:212913,:]
+csv3 = df1.iloc[212913:319369,:]
+csv4 = df1.iloc[319369:425825,:]
+
+csv1.to_csv('csv1.csv', index=False)
+csv2.to_csv('csv2.csv', index=False)
+csv3.to_csv('csv3.csv', index=False)
+csv4.to_csv('csv4.csv', index=False)
+# 106,456
+# total 425824
+# df1.to_csv('re_sp_c_final.csv', index=False)
 # df1['Engagement Rate'] = df1['Engagement Rate'] * 100
 # g = df1.sample(frac=1).reset_index(drop=True)
 # g.to_csv('final_remove_.csv', index=False)
