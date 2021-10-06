@@ -27,15 +27,14 @@ for file_name in list_of_files[:500]:
         except Exception as e:
             comments = []
 
-        if len(comments) > 0:
+        if len(comments) > 25:
             rate = (to_dict['edge_media_preview_like']['count'] + no_comment) / \
                    influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['#Followers'].values[0]
 
             data = {
                 "User ID": to_dict['owner']['id'],
                 "Username": to_dict['owner']['username'],
-                "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[
-                    0],
+                # "Category": influencer_df[influencer_df['Username'] == to_dict['owner']['username']]['Category'].values[0],
                 "Comments": comments,
                 "No of comments": no_comment,
                 "Likes": to_dict['edge_media_preview_like']['count'],
@@ -44,7 +43,7 @@ for file_name in list_of_files[:500]:
                 "Engagement Rate": float("{:.2f}".format(rate)),
                 "Time Stamp": datetime.datetime.fromtimestamp(int(to_dict['taken_at_timestamp'])).strftime(
                     '%Y-%m-%d %H:%M:%S'),
-                "Video or Photo": to_dict['is_video'],
+                # "Video or Photo": to_dict['is_video'],
             }
             data_list.append(data)
     except Exception as e:
@@ -66,8 +65,8 @@ values2 = ['happy', 'not happy']
 df['Is_Response'] = np.select(filters2, values2)
 df.columns = df.columns.str.replace(' ','_')
 
-df2 = df.sample(frac=1).reset_index(drop=True)
-df2.to_csv('json_data_1.csv', index=False)
+# df2 = df.sample(frac=1).reset_index(drop=True) # randomize the rows
+df.to_csv('json_data_1.csv', index=False)
 
 # https://drive.google.com/drive/folders/1UxNZ32HYsgL9xDgGyd4xJThRwFZnQzsZ
 

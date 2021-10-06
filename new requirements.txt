@@ -1,0 +1,8 @@
+1. If it has 3 sentence, then the cell keep in the CSV file==done
+2. Also in the previous CSV, the column for rating has rows where there is 0, it should only be 1 and 2 (no 0,)==done
+
+3. Also, we don't need the 2 columns for : Category and Video_or_Photo. So, the columns are 10, not 12.==done
+4. in the previous CSV file, User_ID is not by row, i.e. 1,2,3,4, etc. Like this: row 1 = User_ID 1, row 2 = User_ID 2, etc.
+Can you make it like this CSV file: == done
+it is for the algorithms, the User_ID is to track every row, i.e. User_ID = row.
+
