@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import re
 
-df1 = pd.read_csv('final_updated.csv')
+df1 = pd.read_csv('data/re_sp_c_final.csv')
 
 # def re_sp_c(x):
 #     re_d = re.sub('[^A-Za-z0-9]+', str(x))
@@ -19,7 +19,7 @@ nan_value = float("NaN")
 df1.replace(" ", nan_value, inplace=True)
 df1.dropna(subset=["Comments"], inplace=True)
 # print(df1['Comments'].head(30))
-filters = [(df1['Engagement Rate'] >= 0.08) & (df1['Engagement Rate'] <= 0.14), (df1['Engagement Rate'] <= 0.07)]
+filters = [(df1['Engagement_Rate'] >= 0.08) & (df1['Engagement_Rate'] <= 0.14), (df1['Engagement_Rate'] <= 0.07)]
 values = [1, 2]
 df1['Ratings'] = np.select(filters, values)
 
