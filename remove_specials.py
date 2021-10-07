@@ -26,16 +26,26 @@ df1['Ratings'] = np.select(filters, values)
 filters2 = [(df1['Ratings'] == 1), (df1['Ratings'] == 2)]
 values2 = ['happy', 'not happy']
 df1['Is_Response'] = np.select(filters2, values2)
-df1.columns = df1.columns.str.replace(' ','_')
-csv1 = df1.iloc[:106456,:]
-csv2 = df1.iloc[106456:212913,:]
-csv3 = df1.iloc[212913:319369,:]
-csv4 = df1.iloc[319369:425825,:]
-
+df1.columns = df1.columns.str.replace(' ', '_')
+df2 = df1[df1['Comments'].astype(str).map(len) > 25]
+df2.loc[df2['Ratings'] == 0, 'Ratings'] = 1
+df2.drop(columns=['Category', 'Video_or_Photo'], axis=1, inplace=True)
+# df2.set_index('User_ID')
+# df2.sort_index(ascending=True)
+print(df2.shape)
+# print(df2.head())
+# ======================
+csv1 = df2.iloc[:106456, :]
+csv2 = df2.iloc[106456:212913, :]
+csv3 = df2.iloc[212913:319369, :]
+csv4 = df2.iloc[319369:425825, :]
+#
 csv1.to_csv('csv1.csv', index=False)
 csv2.to_csv('csv2.csv', index=False)
 csv3.to_csv('csv3.csv', index=False)
 csv4.to_csv('csv4.csv', index=False)
+# ======================
+
 # 106,456
 # total 425824
 # df1.to_csv('re_sp_c_final.csv', index=False)

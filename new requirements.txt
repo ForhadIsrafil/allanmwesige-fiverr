@@ -3,6 +3,6 @@
 
 3. Also, we don't need the 2 columns for : Category and Video_or_Photo. So, the columns are 10, not 12.==done
 4. in the previous CSV file, User_ID is not by row, i.e. 1,2,3,4, etc. Like this: row 1 = User_ID 1, row 2 = User_ID 2, etc.
-Can you make it like this CSV file: == done
-it is for the algorithms, the User_ID is to track every row, i.e. User_ID = row.
+Can you make it like this CSV file:
+it is for the algorithms, the User_ID is to track every row, i.e. User_ID = row. == done
 
