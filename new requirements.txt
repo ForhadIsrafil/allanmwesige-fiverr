@@ -6,3 +6,5 @@
 Can you make it like this CSV file:
 it is for the algorithms, the User_ID is to track every row, i.e. User_ID = row. == done
 
+dropna = (397369, 10)
+without dropna =
