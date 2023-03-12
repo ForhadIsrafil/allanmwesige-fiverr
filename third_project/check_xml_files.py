@@ -13,7 +13,7 @@ file_info = {
 for path in glob("_data_/*"):
     try:
         file_extension = path.split(".")
-        print(file_extension)
+        # print(file_extension)
     except Exception as e:
         # print(e)
         pass
@@ -75,4 +75,4 @@ for path in glob("_data_/*"):
         else:
             file_info['unsupported standard'].append(path.split("\\")[1])
 
-# print(file_info)
+print(file_info)
