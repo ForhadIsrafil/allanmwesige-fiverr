@@ -6,6 +6,14 @@ json_*
 json_data_files
 # C extensions
 *.so
+.idea
+*.docx
+details.txt
+*.xml
+*.STA
+*.xm
+*.XML
+*.pdf
 *.csv
 data
 posts_info.z01
