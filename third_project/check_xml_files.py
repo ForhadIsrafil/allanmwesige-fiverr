@@ -76,3 +76,6 @@ for path in glob("_data_/*"):
             file_info['unsupported standard'].append(path.split("\\")[1])
 
 print(file_info)
+
+file_info_df = pd.DataFrame.from_dict(file_info)
+file_info_df.to_excel("file_information's.xlsx", index=False)
