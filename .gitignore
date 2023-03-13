@@ -8,6 +8,7 @@ json_data_files
 *.so
 .idea
 *.docx
+*.json
 details.txt
 *.xml
 *.STA
