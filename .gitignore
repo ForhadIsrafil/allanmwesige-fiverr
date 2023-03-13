@@ -12,7 +12,7 @@ json_data_files
 details.txt
 *.xml
 *.STA
-output.xlsx
+third_project/output.xlsx
 *.xm
 *.XML
 *.pdf
