@@ -11,6 +11,7 @@ json_data_files
 details.txt
 *.xml
 *.STA
+output.xlsx
 *.xm
 *.XML
 *.pdf
