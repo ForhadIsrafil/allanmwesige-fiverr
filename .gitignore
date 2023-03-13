@@ -12,7 +12,8 @@ json_data_files
 details.txt
 *.xml
 *.STA
-third_project/output.xlsx
+third_project/*.xlsx
+third_project/*.json
 *.xm
 *.XML
 *.pdf
